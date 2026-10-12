@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.code.dataverse:
+      branch: master
+      repo: https://github.com/cessda/cessda.code.dataverse
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.code.dataverse git:
+        commands:
+        - /usr/bin/env sh .sqa/script.purple_zany_macaw.sh
+        container: qc.acc_emerald_blissful_hare
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.code.dataverse find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cinnamon_brave_mink.sh
+        container: qc.doc_periwinkle_upbeat_cougar
+      github.com/cessda/cessda.code.dataverse git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jade_loyal_ibex.sh
+        container: qc.doc_mustard_responsible_wildcat
+      github.com/cessda/cessda.code.dataverse markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.malachite_stoic_wildcat.sh
+        container: qc.doc_umber_flexible_hamster
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.code.dataverse licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.violet_dizzy_boa.sh
+        container: qc.lic_eggplant_cautious_tortoise
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.code.dataverse get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.green_determined_jackal.sh
+        container: qc.ver_isabelline_playful_boa
+timeout: 5400
